@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #111;
+            color: white;
+            padding: 20px 50px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #369e62;
+            transition: background-color 0.3s;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px); /* Navbar yüksekliği çıkarıldı */
+            padding: 20px;
+        }
+
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .contact-input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .contact-button {
+            padding: 12px;
+            background-color: #369e62;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: #298745;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-media img {
+            width: 30px;
+            height: 30px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="about.html">Hakkında</a>
+        <a href="contact.html">İletişim</a>
+        <a href="login.html">Giriş</a>
+        <a href="register.html">Kayıt Ol</a>
+    </nav>
+
+    <div class="contact-container">
+        <form class="contact-form">
+            <h1>İletişim</h1>
+            <input type="text" class="contact-input" placeholder="Adınız" required>
+            <input type="email" class="contact-input" placeholder="E-posta" required>
+            <textarea class="contact-input" rows="5" placeholder="Mesajınız" required></textarea>
+            <button type="submit" class="contact-button">Gönder</button>
+            <div class="social-media">
+                <a href="#"><img src="path/to/facebook-icon.png" alt="Facebook"></a>
+                <a href="#"><img src="path/to/twitter-icon.png" alt="Twitter"></a>
+                <a href="#"><img src="path/to/instagram-icon.png" alt="Instagram"></a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
