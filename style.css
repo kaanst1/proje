@@ -263,7 +263,7 @@ footer {
   color: #369e62;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .productDetails {
       width: 100%;
@@ -277,7 +277,7 @@ footer {
 
 
 
-/* Shopping Cart Styles */
+
 .cart-container {
     position: relative;
     display: inline-block;

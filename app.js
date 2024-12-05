@@ -89,18 +89,18 @@ const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
-    //change the current slide
+    
     wrapper.style.transform = `translateX(${-100 * index}vw)`;
 
-    //change the choosen product
+    
     choosenProduct = products[index];
 
-    //change texts of currentProduct
+    
     currentProductTitle.textContent = choosenProduct.title;
     currentProductPrice.textContent = "$" + choosenProduct.price;
     currentProductImg.src = choosenProduct.colors[0].img;
 
-    //assing new colors
+    
     currentProductColors.forEach((color, index) => {
       color.style.backgroundColor = choosenProduct.colors[index].code;
     });
@@ -137,7 +137,7 @@ close.addEventListener("click", () => {
 });
 
 
-// Cart Functionality
+
 let cart = [];
 
 function addToCart(productId, quantity = 1) {
@@ -160,7 +160,7 @@ function removeFromCart(productId) {
 
 function updateCartUI() {
     const cartDropdown = document.querySelector(".cart-dropdown");
-    cartDropdown.innerHTML = ""; // Clear existing cart items
+    cartDropdown.innerHTML = ""; 
 
     if (cart.length === 0) {
         cartDropdown.innerHTML = "<p>Your cart is empty!</p>";
@@ -182,7 +182,7 @@ function updateCartUI() {
     });
 }
 
-// Example: Adding event listener to "Buy Now" buttons
+
 document.querySelectorAll(".buyButton").forEach((button, index) => {
     button.addEventListener("click", () => addToCart(products[index].id));
 });
