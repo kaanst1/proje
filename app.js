@@ -9,11 +9,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "./img/air.png",
+        img: "../assets/Images/sneaker-images/air.png",
       },
       {
         code: "darkblue",
-        img: "./img/air2.png",
+        img: "../assets/Images/sneaker-images/air2.png",
       },
     ],
   },
@@ -24,11 +24,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "./img/jordan.png",
+        img: "../assets/Images/sneaker-images/jordan.png",
       },
       {
         code: "green",
-        img: "./img/jordan2.png",
+        img: "../assets/Images/sneaker-images/jordan2.png",
       },
     ],
   },
@@ -39,11 +39,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "./img/blazer.png",
+        img: "../assets/Images/sneaker-images/blazer.png",
       },
       {
         code: "green",
-        img: "./img/blazer2.png",
+        img: "../assets/Images/sneaker-images/blazer2.png",
       },
     ],
   },
@@ -54,11 +54,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "./img/crater.png",
+        img: "../assets/Images/sneaker-images/crater.png",
       },
       {
         code: "lightgray",
-        img: "./img/crater2.png",
+        img: "../assets/Images/sneaker-images/crater2.png",
       },
     ],
   },
@@ -69,11 +69,11 @@ const products = [
     colors: [
       {
         code: "gray",
-        img: "./img/hippie.png",
+        img: "../assets/Images/sneaker-images/hippie.png",
       },
       {
         code: "black",
-        img: "./img/hippie2.png",
+        img: "../assets/Images/sneaker-images/hippie2.png",
       },
     ],
   },
@@ -89,18 +89,18 @@ const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
-    //change the current slide
+    
     wrapper.style.transform = `translateX(${-100 * index}vw)`;
 
-    //change the choosen product
+    
     choosenProduct = products[index];
 
-    //change texts of currentProduct
+    
     currentProductTitle.textContent = choosenProduct.title;
     currentProductPrice.textContent = "$" + choosenProduct.price;
     currentProductImg.src = choosenProduct.colors[0].img;
 
-    //assing new colors
+    
     currentProductColors.forEach((color, index) => {
       color.style.backgroundColor = choosenProduct.colors[index].code;
     });
@@ -134,55 +134,4 @@ productButton.addEventListener("click", () => {
 
 close.addEventListener("click", () => {
   payment.style.display = "none";
-});
-
-
-// Cart Functionality
-let cart = [];
-
-function addToCart(productId, quantity = 1) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    
-    const existingProduct = cart.find(item => item.id === productId);
-    if (existingProduct) {
-        existingProduct.quantity += quantity;
-    } else {
-        cart.push({ ...product, quantity });
-    }
-    updateCartUI();
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCartUI();
-}
-
-function updateCartUI() {
-    const cartDropdown = document.querySelector(".cart-dropdown");
-    cartDropdown.innerHTML = ""; // Clear existing cart items
-
-    if (cart.length === 0) {
-        cartDropdown.innerHTML = "<p>Your cart is empty!</p>";
-        return;
-    }
-
-    cart.forEach(item => {
-        const cartItem = document.createElement("div");
-        cartItem.classList.add("cart-item");
-        cartItem.innerHTML = `
-            <img src="${item.colors[0].img}" class="cart-item-img" alt="${item.title}" />
-            <div class="cart-item-details">
-                <h4>${item.title}</h4>
-                <p>${item.quantity} x $${item.price}</p>
-                <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
-            </div>
-        `;
-        cartDropdown.appendChild(cartItem);
-    });
-}
-
-// Example: Adding event listener to "Buy Now" buttons
-document.querySelectorAll(".buyButton").forEach((button, index) => {
-    button.addEventListener("click", () => addToCart(products[index].id));
 });
