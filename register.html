@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .register-container {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .register-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .register-container label {
+            display: block;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .register-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .register-container input:focus {
+            border-color: black;
+            outline: none;
+        }
+        .register-container button {
+            background: black;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .register-container button:hover {
+            background: black;
+        }
+        .register-container .link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+        .register-container .link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 15px 20px;
+            }
+
+            .register-container h2 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Kayıt Ol</h2>
+        <form action="/register" method="POST">
+            <label for="fullname">Ad Soyad:</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Adınızı ve soyadınızı girin" required>
+
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" name="username" placeholder="Kullanıcı adınızı seçin" required>
+
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" name="password" placeholder="Şifrenizi oluşturun" required>
+
+            <label for="confirm_password">Şifre Tekrar:</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Şifrenizi tekrar girin" required>
+
+            <button type="submit">Kayıt Ol</button>
+        </form>
+        <a href="/login" class="link">Zaten bir hesabınız var mı? Giriş Yap</a>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+    
+        form.addEventListener('submit', function (e) {
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                alert('Şifreler eşleşmiyor. Lütfen tekrar kontrol edin.');
+            }
+        });
+    </script>    
+</body>
+</html>
