@@ -9,31 +9,53 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
-            color: #333333;
+            background-color: #f4f4f4;
+            color: #333;
         }
 
         header {
-            background-color: #28a745;
+            background-color: #145a32;
             color: white;
-            padding: 1rem 0;
+            padding: 2rem 0;
             text-align: center;
         }
 
         h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.8rem;
         }
 
         .faq-container {
-            max-width: 800px;
+            max-width: 80%;
             margin: 2rem auto;
-            padding: 1rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .faq-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .advertisement {
+            flex: 0.4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .faq-item {
-            border-bottom: 1px solid #cccccc;
-            padding: 1rem 0;
+            border-bottom: 1px solid #dcdcdc;
+            padding: 1.5rem 0;
         }
 
         .faq-item:last-child {
@@ -42,12 +64,136 @@
 
         .question {
             font-weight: bold;
-            color: #28a745;
-            margin-bottom: 0.5rem;
+            color: #145a32;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
         }
 
         .answer {
             margin: 0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .footerMenu {
+            background-color: #e8e8e8;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .fMenuTitle {
+            font-size: 2rem;
+            color: #145a32;
+            margin-bottom: 1.5rem;
+        }
+
+        .fList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .fListItem {
+            margin: 0.5rem 0;
+        }
+
+        .fListItem a {
+            text-decoration: none;
+            color: #145a32;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .fListItem a:hover {
+            color: #0b3d1e;
+        }
+
+        .contact-us {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .contact-us a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: #145a32;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-us a:hover {
+            background-color: #0b3d1e;
+            transform: translateY(-2px);
+        }
+
+        /* Media Queries for Responsiveness */
+
+        /* Tablet and below */
+        @media (max-width: 1024px) {
+            .faq-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .advertisement {
+                flex: 1;
+                height: auto;
+                margin-bottom: 1rem;
+            }
+
+            .fList {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .fMenuTitle {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* Mobile and below */
+        @media (max-width: 768px) {
+            .faq-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .advertisement {
+                flex: 1;
+                height: auto; /* Reklam boyutlarını uyarlama */
+                margin-bottom: 1rem;
+            }
+
+            .fList {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .fMenuTitle {
+                font-size: 1.7rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .faq-item {
+                padding: 1rem 0;
+            }
+
+            .contact-us a {
+                font-size: 1rem;
+                padding: 0.6rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -56,26 +202,47 @@
         <h1>SneakerStore - FAQ</h1>
     </header>
     <div class="faq-container">
-        <div class="faq-item">
-            <p class="question">1. SneakerStore nerede bulunuyor?</p>
-            <p class="answer">SneakerStore yalnızca çevrimiçi bir mağazadır ve tüm siparişlerimizi internet üzerinden teslim ediyoruz.</p>
+        <div class="advertisement">
+            <img src="ad1.jpg" alt="Advertisement 1">
         </div>
-        <div class="faq-item">
-            <p class="question">2. Kargo süresi ne kadar sürer?</p>
-            <p class="answer">Kargo süresi genellikle 3-5 iş günü arasında değişmektedir. Ancak yoğun dönemlerde bu süre uzayabilir.</p>
+        <div class="faq-content">
+            <div class="faq-item">
+                <p class="question">1. SneakerStore nerede bulunuyor?</p>
+                <p class="answer">SneakerStore yalnızca çevrimiçi bir mağazadır ve tüm siparişlerimizi internet üzerinden teslim ediyoruz.</p>
+            </div>
+            <div class="faq-item">
+                <p class="question">2. Kargo süresi ne kadar sürer?</p>
+                <p class="answer">Kargo süresi genellikle 3-5 iş günü arasında değişmektedir. Ancak yoğun dönemlerde bu süre uzayabilir.</p>
+            </div>
+            <div class="faq-item">
+                <p class="question">3. İade politikası nedir?</p>
+                <p class="answer">Satın aldığınız ürünleri teslim aldıktan sonra 30 gün içinde iade edebilirsiniz. Ürünlerin kullanılmamış ve orijinal ambalajında olması gereklidir.</p>
+            </div>
+            <div class="faq-item">
+                <p class="question">4. Hangi ödeme yöntemlerini kabul ediyorsunuz?</p>
+                <p class="answer">Visa, Mastercard, American Express ve PayPal ile ödeme kabul ediyoruz.</p>
+            </div>
+            <div class="faq-item">
+                <p class="question">5. Ürün stoğu hakkında nasıl bilgi alabilirim?</p>
+                <p class="answer">Ürünlerin stok durumu, ürün sayfasında belirtilmektedir. Eğer tükenmişse, "Stokta Yok" ibaresini göreceksiniz.</p>
+            </div>
         </div>
-        <div class="faq-item">
-            <p class="question">3. İade politikası nedir?</p>
-            <p class="answer">Satın aldığınız ürünleri teslim aldıktan sonra 30 gün içinde iade edebilirsiniz. Ürünlerin kullanılmamış ve orijinal ambalajında olması gereklidir.</p>
+        <div class="advertisement">
+            <img src="ad2.jpg" alt="Advertisement 2">
         </div>
-        <div class="faq-item">
-            <p class="question">4. Hangi ödeme yöntemlerini kabul ediyorsunuz?</p>
-            <p class="answer">Visa, Mastercard, American Express ve PayPal ile ödeme kabul ediyoruz.</p>
-        </div>
-        <div class="faq-item">
-            <p class="question">5. Ürün stoğu hakkında nasıl bilgi alabilirim?</p>
-            <p class="answer">Ürünlerin stok durumu, ürün sayfasında belirtilmektedir. Eğer tükenmişse, "Stokta Yok" ibaresini göreceksiniz.</p>
-        </div>
+    </div>
+    <div class="contact-us">
+        <a href="contact.html">Contact Us</a>
+    </div>
+    <div class="footerMenu">
+        <h1 class="fMenuTitle">Useful Links</h1>
+        <ul class="fList">
+            <li class="fListItem"><a href="support.html">Support</a></li>
+            <li class="fListItem"><a href="refund.html">Refund</a></li>
+            <li class="fListItem"><a href="faq.html">FAQ</a></li>
+            <li class="fListItem"><a href="feedback.html">Feedback</a></li>
+            <li class="fListItem"><a href="stores.html">Stores</a></li>
+        </ul>
     </div>
 </body>
 </html>
