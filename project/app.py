@@ -73,3 +73,26 @@ def dashboard():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    from flask import Flask, render_template, request, redirect, flash, url_for
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Veritabanı bağlantısı
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
