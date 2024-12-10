@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Giriş Yap</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="login-container">
+            <h2>Giriş Yap</h2>
+            <form method="POST" action="/login">
+                <label for="username">Kullanıcı Adı:</label>
+                <input type="text" id="username" name="username" placeholder="Kullanıcı adınızı girin" required>
+    
+                <label for="password">Şifre:</label>
+                <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required>
+    
+                <button type="submit">Giriş Yap</button>
+            </form>
+            <a href="/register" class="link">Henüz bir hesabınız yok mu? Kayıt Ol</a>
+            <a href="/forgot-password" class="link">Şifremi Unuttum?</a>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+    </html>
+    

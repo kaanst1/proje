@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Kayıt Ol</h2>
+        <form id="registerForm" method="POST" action="/register">
+            <label for="username">Kullanıcı Adı:</label>
+            <input type="text" id="username" name="username" placeholder="Kullanıcı adınızı girin" required>
+
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required>
+
+            <label for="confirm_password">Şifre Tekrarı:</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Şifrenizi tekrar girin" required>
+
+            <button type="submit">Kayıt Ol</button>
+        </form>
+        <a href="/login" class="link">Zaten bir hesabınız var mı? Giriş Yap</a>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+
+
