@@ -9,11 +9,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "../assets/Images/sneaker-images/air.png",
+        img: "../img/air.png",
       },
       {
         code: "darkblue",
-        img: "../assets/Images/sneaker-images/air2.png",
+        img: "../img/air2.png",
       },
     ],
   },
@@ -24,11 +24,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "../assets/Images/sneaker-images/jordan.png",
+        img: "../img/jordan.png",
       },
       {
         code: "green",
-        img: "../assets/Images/sneaker-images/jordan2.png",
+        img: "../img/jordan2.png",
       },
     ],
   },
@@ -39,11 +39,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "../assets/Images/sneaker-images/blazer.png",
+        img: "../img/blazer.png",
       },
       {
         code: "green",
-        img: "../assets/Images/sneaker-images/blazer2.png",
+        img: "../img/blazer2.png",
       },
     ],
   },
@@ -54,11 +54,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "../assets/Images/sneaker-images/crater.png",
+        img: "../img/crater.png",
       },
       {
         code: "lightgray",
-        img: "../assets/Images/sneaker-images/crater2.png",
+        img: "../img/crater2.png",
       },
     ],
   },
@@ -69,11 +69,11 @@ const products = [
     colors: [
       {
         code: "gray",
-        img: "../assets/Images/sneaker-images/hippie.png",
+        img: "../img/hippie.png",
       },
       {
         code: "black",
-        img: "../assets/Images/sneaker-images/hippie2.png",
+        img: "../img/hippie2.png",
       },
     ],
   },

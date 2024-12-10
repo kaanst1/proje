@@ -6,7 +6,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Giriş Yap</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="/project/static/style.css">
+        <script src="/project/static/script.js" ></script>
     </head>
     <body>
         <div class="login-container">
@@ -20,10 +21,10 @@
     
                 <button type="submit">Giriş Yap</button>
             </form>
-            <a href="/register" class="link">Henüz bir hesabınız yok mu? Kayıt Ol</a>
+            <a href="/project/templates/register.html" class="link">Henüz bir hesabınız yok mu? Kayıt Ol</a>
             <a href="/forgot-password" class="link">Şifremi Unuttum?</a>
         </div>
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script src="/project/static/script.js"></script>
     </body>
     </html>
     
