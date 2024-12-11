@@ -8,6 +8,7 @@ app.secret_key = 'your_secret_key'
 # Veritabanı yapılandırması
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True  # SQL sorgularını terminalde gösterir (debug için)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
@@ -36,18 +37,36 @@ def register():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        confirm_password = request.form['confirm_password']
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash('Bu e-posta zaten kayıtlı.', 'danger')
+        # Şifreler eşleşiyor mu?
+        if password != confirm_password:
+            flash('Şifreler eşleşmiyor. Lütfen tekrar deneyin.', 'danger')
             return redirect(url_for('register'))
 
-        new_user = User(fullname=fullname, email=email, username=username, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash('Kayıt başarılı! Şimdi giriş yapabilirsiniz.', 'success')
-        return redirect(url_for('login'))
+        # E-posta veya kullanıcı adı zaten kayıtlı mı?
+        existing_user = User.query.filter((User.email == email) | (User.username == username)).first()
+        if existing_user:
+            flash('E-posta veya kullanıcı adı zaten kayıtlı.', 'danger')
+            return redirect(url_for('register'))
+
+        # Şifreyi hashleme
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+        try:
+            # Yeni kullanıcıyı kaydetme
+            new_user = User(fullname=fullname, email=email, username=username, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('Kayıt başarılı! Şimdi giriş yapabilirsiniz.', 'success')
+            return redirect(url_for('login'))
+
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Bir hata oluştu: {e}', 'danger')
+            return redirect(url_for('register'))
+
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -62,6 +81,7 @@ def login():
             session['username'] = user.username
             flash('Başarıyla giriş yaptınız.', 'success')
             return redirect(url_for('home'))
+
         flash('Hatalı e-posta veya şifre.', 'danger')
     return render_template('login.html')
 
@@ -73,5 +93,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
