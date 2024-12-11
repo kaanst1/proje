@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anasayfa</title>
+</head>
+<body>
+    <h1>Hoş Geldiniz!</h1>
+    <p>Kayıtlı değilseniz <a href="/register">Kayıt Ol</a>, giriş yapmak için <a href="/login">Giriş Yap</a>.</p>
+    <h3 class="menuItem">
+        <a href="{{ url_for('register') }}" class="register-link">Kayıt Ol</a>
+    </h3>
+    <h3 class="menuItem">
+        <a href="{{ url_for('login') }}" class="login-link">Giriş Yap</a>
+    </h3>
+    
+</body>
+</html>

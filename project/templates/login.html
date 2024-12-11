@@ -1,40 +1,21 @@
 <!DOCTYPE html>
 <html lang="tr">
-    <!DOCTYPE html>
-    <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Giriş Yap</title>
-        <link rel="stylesheet" href="/project/static/style.css">
-        <script src="/project/static/script.js" ></script>
-    </head>
-    <body>
-        <div class="login-container">
-            <h2>Giriş Yap</h2>
-            <form method="POST" action="/project/templates/login.html">
-                <label for="username">Kullanıcı Adı:</label>
-                <input type="text" id="username" name="username" placeholder="Kullanıcı adınızı girin" required>
-    
-                <label for="password">Şifre:</label>
-                <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required>
-    
-                <button type="submit">Giriş Yap</button>
-            </form>
-            <a href="/project/templates/register.html" class="link">Henüz bir hesabınız yok mu? Kayıt Ol</a>
-            <a href="/forgot-password" class="link">Şifremi Unuttum?</a>
-        </div>
-        <script src="static/script.js"></script>
-        <form id="loginForm" method="POST" action="/login">
-            <!-- Giriş formu alanları -->
-        </form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+</head>
+<body>
+    <h2>Giriş Yap</h2>
+    <form action="/login" method="POST">
+        <label for="email">E-posta:</label>
+        <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
         
-        <form id="registerForm" method="POST" action="/register">
-            <!-- Kayıt formu alanları -->
-            <input type="password" id="password" name="password">
-            <input type="password" id="confirm_password" name="confirm_password">
-        </form>
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required>
         
-    </body>
-    </html>
-    
+        <button type="submit">Giriş Yap</button>
+    </form>
+    <a href="/register">Hesabınız yok mu? Kayıt Ol</a>
+</body>
+</html>

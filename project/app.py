@@ -1,27 +1,34 @@
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+# Veritabanı yapılandırması
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
-# Kullanıcı modelini tanımlayın
+# Kullanıcı modeli
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    fullname = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    password = db.Column(db.String(150), nullable=False)
 
-# Veritabanını oluştur
+# Veritabanını oluşturma
 with app.app_context():
     db.create_all()
 
-# Kayıt formu rotası
+@app.route('/')
+def home():
+    if 'user_id' in session:
+        return f"Hoş geldin, {session['username']}! Çıkış yapmak için <a href='/logout'>buraya tıklayın</a>."
+    return render_template('index.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -29,70 +36,42 @@ def register():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        confirm_password = request.form['confirm_password']
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        if password != confirm_password:
-            flash('Şifreler eşleşmiyor. Lütfen tekrar deneyin.')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Bu e-posta zaten kayıtlı.', 'danger')
             return redirect(url_for('register'))
 
-        hashed_password = generate_password_hash(password, method='sha256')
         new_user = User(fullname=fullname, email=email, username=username, password=hashed_password)
-
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Kayıt başarılı! Giriş yapabilirsiniz.')
-            return redirect(url_for('login'))
-        except:
-            flash('Bu e-posta veya kullanıcı adı zaten kullanılıyor.')
-            return redirect(url_for('register'))
-
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Kayıt başarılı! Şimdi giriş yapabilirsiniz.', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html')
 
-# Giriş formu rotası
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
 
-        if user and check_password_hash(user.password, password):
-            flash('Giriş başarılı!')
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Geçersiz kullanıcı adı veya şifre.')
-            return redirect(url_for('login'))
-
+        user = User.query.filter_by(email=email).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            session['user_id'] = user.id
+            session['username'] = user.username
+            flash('Başarıyla giriş yaptınız.', 'success')
+            return redirect(url_for('home'))
+        flash('Hatalı e-posta veya şifre.', 'danger')
     return render_template('login.html')
 
-# Gösterge paneli rotası
-@app.route('/dashboard')
-def dashboard():
-    return "Dashboard'a hoş geldiniz!"
+@app.route('/logout')
+def logout():
+    session.clear()
+    flash('Başarıyla çıkış yaptınız.', 'success')
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
-    from flask import Flask, render_template, request, redirect, flash, url_for
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Veritabanı bağlantısı
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-# app.py
-from flask import Flask, render_template
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
