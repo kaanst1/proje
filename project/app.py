@@ -30,7 +30,7 @@ def home():
         return f"Hoş geldin, {session['username']}! Çıkış yapmak için <a href='/logout'>buraya tıklayın</a>."
     return render_template('index.html')
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
     if request.method == 'POST':
         fullname = request.form['fullname']
@@ -93,3 +93,4 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+ 
