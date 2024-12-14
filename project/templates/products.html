@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ürünler</title>
+</head>
+<body>
+    <h1>Ürünler</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            {{ product.name }} - {{ product.price }} TL
+            <form action="/add_to_cart/{{ product.id }}" method="post" style="display:inline;">
+                <button type="submit">Sepete Ekle</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/cart">Sepeti Görüntüle</a>
+</body>
+</html>

@@ -20,9 +20,20 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
 
+# Ürün modeli
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+
 # Veritabanını oluşturma
 with app.app_context():
     db.create_all()
+
+# Oturumda sepeti başlatma fonksiyonu
+def initialize_cart():
+    if 'cart' not in session:
+        session['cart'] = []
 
 @app.route('/')
 def home():
@@ -32,7 +43,6 @@ def home():
 
 @app.route('/register', methods=['POST'])
 def register():
-    print(request.method)
     if request.method == 'POST':
         fullname = request.form['fullname']
         email = request.form['email']
@@ -92,6 +102,43 @@ def logout():
     flash('Başarıyla çıkış yaptınız.', 'success')
     return redirect(url_for('home'))
 
+# Ürünleri listeleme
+@app.route('/products')
+def product_list():
+    if 'user_id' not in session:
+        flash('Ürünleri görmek için giriş yapmalısınız.', 'danger')
+        return redirect(url_for('login'))
+    
+    products = Product.query.all()
+    return render_template('products.html', products=products)
+
+# Sepete ürün ekleme
+@app.route('/add_to_cart/<int:product_id>', methods=['POST'])
+def add_to_cart(product_id):
+    initialize_cart()
+    product = Product.query.get(product_id)
+    if product:
+        session['cart'].append({'id': product.id, 'name': product.name, 'price': product.price})
+        session.modified = True
+        flash(f'{product.name} sepete eklendi.', 'success')
+    else:
+        flash('Ürün bulunamadı.', 'danger')
+    return redirect(url_for('product_list'))
+
+# Sepeti görüntüleme
+@app.route('/cart')
+def view_cart():
+    initialize_cart()
+    return render_template('cart.html', cart=session['cart'])
+
+# Sepeti temizleme
+@app.route('/clear_cart', methods=['POST'])
+def clear_cart():
+    session.pop('cart', None)
+    flash('Sepet temizlendi.', 'success')
+    return redirect(url_for('view_cart'))
+
 if __name__ == '__main__':
     app.run(debug=True)
+
  
