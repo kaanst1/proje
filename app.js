@@ -1,5 +1,49 @@
 const wrapper = document.querySelector(".sliderWrapper");
 const menuItems = document.querySelectorAll(".menuItem");
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerMenu = document.getElementById("hamburger-menu");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+  const subcategories = document.getElementById("subcategories");
+  let activeCategory = null;
+
+  // Hamburger menüsüne tıklayınca açılır listeyi göster veya gizle
+  hamburgerMenu.addEventListener("click", () => {
+      if (dropdownMenu.style.display === "block") {
+          dropdownMenu.style.display = "none";
+          subcategories.style.display = "none"; // Alt kategorileri de gizle
+      } else {
+          dropdownMenu.style.display = "block";
+          subcategories.style.display = "none"; // Alt kategoriler kapalı başlasın
+      }
+  });
+
+  // Kategoriye tıklanınca ilgili alt kategorileri göster
+  document.querySelectorAll(".dropdown-menu .category").forEach((category) => {
+      category.addEventListener("click", () => {
+          const categoryName = category.getAttribute("data-category");
+          activeCategory = categoryName;
+
+          // İlgili alt kategorileri göster, diğerlerini gizle
+          subcategories.style.display = "block";
+          document.querySelectorAll(".subcategories .subcategory").forEach((subcategory) => {
+              if (subcategory.getAttribute("data-parent") === categoryName) {
+                  subcategory.style.display = "block";
+              } else {
+                  subcategory.style.display = "none";
+              }
+          });
+      });
+  });
+
+  // Menülerin dışında bir yere tıklanınca menüyü gizle
+  document.addEventListener("click", (e) => {
+      if (!hamburgerMenu.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownMenu.style.display = "none";
+          subcategories.style.display = "none";
+      }
+  });
+});
+
 
 const products = [
   {
@@ -17,6 +61,7 @@ const products = [
       },
     ],
   },
+  
   {
     id: 2,
     title: "Air Jordan",
