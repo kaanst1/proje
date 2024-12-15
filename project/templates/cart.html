@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Alışveriş Sepeti</title>
+</head>
+<body>
+    <h1>Alışveriş Sepeti</h1>
+    <ul>
+        {% for item in cart %}
+        <li>{{ item.name }} - {{ item.price }} TL</li>
+        {% endfor %}
+    </ul>
+    <form action="/clear_cart" method="post">
+        <button type="submit">Sepeti Temizle</button>
+    </form>
+    <a href="/products">Ürünlere Dön</a>
+</body>
+</html>
+
