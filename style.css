@@ -11,26 +11,29 @@ body {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 1280px;
+  
 }
 
 .hamburger-menu .line {
-  width: 30px;
-  height: 3px;
+  position: relative; 
+  top: 80px; 
+  width: 35px;
+  height: 4px;
   background-color: #ffffff;
-  margin: 4px 0;
+  margin: 3px 0;
 }
 
 .dropdown-menu {
   display: none;
   background-color: #000000;
-  border: 1px solid #303030;
+  border: 1px solid rgb(255, 255, 255);
   position: absolute;
-  top: 50px;
-  left: 10px;
+  top: 150px;
+  left: 1180px;
   padding: 10px;
   z-index: 10;  
-  width: 150px;
+  width: 180px;
 }
 
 .dropdown-menu .category {
@@ -45,10 +48,10 @@ body {
 .subcategories {
   display: none;
   background-color: #000000;
-  border: 1px solid #5e5e5e;
+  border: 1px solid rgb(255, 255, 255);
   position: absolute;
-  top: 50px;
-  left: 170px;
+  top: 150px;
+  left: 1330px;
   padding: 10px;
   z-index: 10;
   width: 150px;
