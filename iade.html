@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürün İade Formu</title>
+  <link rel="stylesheet" href="styles.css"> <!-- İhtiyacınıza göre stil dosyası ekleyebilirsiniz -->
+</head>
+<body>
+  <header>
+    <!-- Sayfa başlığı ve navigasyon gibi alanlar buraya gelebilir -->
+  </header>
+
+  <main>
+    <!-- İade Formu burada olacak -->
+    <div class="return-form">
+      <h3>Ürün İade Talebi</h3>
+      <form action="/submit-return" method="POST">
+        <label for="order-id">Sipariş Numarası:</label>
+        <input type="text" id="order-id" name="order-id" required><br><br>
+
+        <label for="product-name">Ürün Adı:</label>
+        <input type="text" id="product-name" name="product-name" required><br><br>
+
+        <label for="reason">İade Nedeni:</label>
+        <textarea id="reason" name="reason" required></textarea><br><br>
+
+        <label for="return-date">İade Tarihi:</label>
+        <input type="date" id="return-date" name="return-date" required><br><br>
+
+        <input type="submit" value="İade Talebini Gönder">
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Sayfa altbilgisi buraya gelebilir -->
+  </footer>
+
+</body>
+</html>

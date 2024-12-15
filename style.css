@@ -545,3 +545,37 @@ footer {
     padding: 20px;
   }
 }
+.return-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.return-form label {
+  font-size: 16px;
+  display: block;
+  margin: 8px 0;
+}
+
+.return-form input, .return-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.return-form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.return-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
