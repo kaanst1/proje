@@ -5,7 +5,83 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdownMenu = document.getElementById("dropdown-menu");
   const subcategories = document.getElementById("subcategories");
   let activeCategory = null;
-  
+  // Sepet Verileri
+const cartItems = [];
+const cartIcon = document.getElementById("cart-icon");
+const cartPopup = document.getElementById("cart-popup");
+const cartItemsContainer = document.querySelector(".cart-items");
+
+// "SEPETE EKLE" Butonlarına Tıklama
+document.querySelectorAll(".productButton").forEach((button) => {
+    button.addEventListener("click", (event) => {
+        // Ürün Verilerini Al
+        const productId = button.getAttribute("data-product-id");
+        const productName = button.getAttribute("data-product-name");
+        const productPrice = button.getAttribute("data-product-price");
+        const productImage = button.getAttribute("data-product-image");
+
+        // Sepete Ürün Ekle
+        cartItems.push({ id: productId, name: productName, price: productPrice, image: productImage });
+        updateCartUI();
+    });
+});
+button.addEventListener("click", (event) => {
+  // Ürün Verilerini Al
+  const productId = button.getAttribute("data-product-id");
+  const productName = button.getAttribute("data-product-name");
+  const productPrice = button.getAttribute("data-product-price");
+  const productImage = button.getAttribute("data-product-image");
+
+  console.log(productId, productName, productPrice, productImage); // Test için konsola yazdır
+});
+function updateCartUI() {
+  cartItemsContainer.innerHTML = ""; // Eski içeriği temizle
+
+  cartItems.forEach((item) => {
+      const itemElement = document.createElement("div");
+      itemElement.classList.add("cart-item");
+      itemElement.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" width="50" />
+          <div>
+              <h4>${item.name}</h4>
+              <p>${item.price}</p>
+          </div>
+      `;
+      cartItemsContainer.appendChild(itemElement);
+  });
+
+  // Sepet popup'ını görünür yap
+  cartPopup.classList.add("active");
+}
+
+
+// Sepet UI Güncelleme
+function updateCartUI() {
+    cartItemsContainer.innerHTML = ""; // Eski içeriği temizle
+
+    // Her bir ürün için yeni içerik oluştur
+    cartItems.forEach((item) => {
+        const itemElement = document.createElement("div");
+        itemElement.classList.add("cart-item");
+        itemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" width="50" />
+            <div>
+                <h4>${item.name}</h4>
+                <p>${item.price}</p>
+            </div>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+    });
+
+    // Sepet popup'ını görünür yap
+    cartPopup.classList.add("active");
+}
+
+// Sepet İkonuna Tıklama
+cartIcon.addEventListener("click", () => {
+    cartPopup.classList.toggle("active");
+});
+
 
   // Hamburger menüsüne tıklayınca açılır listeyi göster veya gizle
   hamburgerMenu.addEventListener("click", () => {
