@@ -1,5 +1,5 @@
 const wrapper = document.querySelector(".sliderWrapper");
-const menuItems = document.querySelectorAll(".menuItem");
+const menuItems = document.querySelectorAll(".menuItem:not(.passItem)");
 document.addEventListener("DOMContentLoaded", () => {
   const hamburgerMenu = document.getElementById("hamburger-menu");
   const dropdownMenu = document.getElementById("dropdown-menu");
@@ -24,15 +24,6 @@ document.querySelectorAll(".productButton").forEach((button) => {
         cartItems.push({ id: productId, name: productName, price: productPrice, image: productImage });
         updateCartUI();
     });
-});
-button.addEventListener("click", (event) => {
-  // Ürün Verilerini Al
-  const productId = button.getAttribute("data-product-id");
-  const productName = button.getAttribute("data-product-name");
-  const productPrice = button.getAttribute("data-product-price");
-  const productImage = button.getAttribute("data-product-image");
-
-  console.log(productId, productName, productPrice, productImage); // Test için konsola yazdır
 });
 function updateCartUI() {
   cartItemsContainer.innerHTML = ""; // Eski içeriği temizle
@@ -156,11 +147,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "../img/air.png",
+        img: "img/air.png",
       },
       {
         code: "darkblue",
-        img: "../img/air2.png",
+        img: "img/air2.png",
       },
     ],
   },
@@ -172,11 +163,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "../img/jordan.png",
+        img: "img/jordan.png",
       },
       {
         code: "green",
-        img: "../img/jordan2.png",
+        img: "img/jordan2.png",
       },
     ],
   },
@@ -187,11 +178,11 @@ const products = [
     colors: [
       {
         code: "lightgray",
-        img: "../img/blazer.png",
+        img: "img/blazer.png",
       },
       {
         code: "green",
-        img: "../img/blazer2.png",
+        img: "img/blazer2.png",
       },
     ],
   },
@@ -202,11 +193,11 @@ const products = [
     colors: [
       {
         code: "black",
-        img: "../img/crater.png",
+        img: "img/crater.png",
       },
       {
         code: "lightgray",
-        img: "../img/crater2.png",
+        img: "img/crater2.png",
       },
     ],
   },
@@ -217,11 +208,11 @@ const products = [
     colors: [
       {
         code: "gray",
-        img: "../img/hippie.png",
+        img: "img/hippie.png",
       },
       {
         code: "black",
-        img: "../img/hippie2.png",
+        img: "img/hippie2.png",
       },
     ],
   },
@@ -247,7 +238,11 @@ menuItems.forEach((item, index) => {
     currentProductTitle.textContent = choosenProduct.title;
     currentProductPrice.textContent = "$" + choosenProduct.price;
     currentProductImg.src = choosenProduct.colors[0].img;
-
+    let btn = document.getElementById('addToCart');
+    btn.setAttribute('data-product-id', choosenProduct.id.toString());
+    btn.setAttribute('data-product-name', choosenProduct.title);
+    btn.setAttribute('data-product-price', choosenProduct.price.toFixed(2));
+    btn.setAttribute('data-product-image', choosenProduct.colors[0].img);
     
     currentProductColors.forEach((color, index) => {
       color.style.backgroundColor = choosenProduct.colors[index].code;

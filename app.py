@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
-app = Flask(__name__)
+#app = Flask(__name__)
+app = Flask(__name__, template_folder='')
 app.secret_key = 'your_secret_key'
 
 # Veritabanı yapılandırması
@@ -37,9 +38,10 @@ def initialize_cart():
 
 @app.route('/')
 def home():
+    userdata = { 'login': False, 'name': '', 'id': 0 }
     if 'user_id' in session:
-        return f"Hoş geldin, {session['username']}! Çıkış yapmak için <a href='/logout'>buraya tıklayın</a>."
-    return render_template('index.html')
+       userdata = { 'login': True, 'name': session['username'], 'id': session['user_id'] }
+    return render_template('index.html', **userdata)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -77,8 +79,7 @@ def register():
             db.session.rollback()
             flash(f'Bir hata oluştu: {e}', 'danger')
             return redirect(url_for('register'))
-
-    return render_template('register.html')
+    return render_template('/register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

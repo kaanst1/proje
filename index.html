@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <base href="{{ url_for('static', filename='') }}" />
     <link rel="stylesheet" href="style.css" />
     <title>Sneaker Shoes Online</title>
   </head>
@@ -72,8 +73,13 @@
             <h3 class="menuItem">BLAZER</h3>
             <h3 class="menuItem">CRATER</h3>
             <h3 class="menuItem">HIPPIE</h3>
-            <h3 class="menuItem"><a href="project/templates/register.html" class="register-link">Kayıt Ol </a></h3>
-            <h3 class="menuItem"><a href="project/templates/login.html" class="login-link">Giriş Yap </a></h3>
+            
+    {% if(login) %}
+    <h3 class="menuItem passItem"><span>Hoşgeldiniz, {{ name }}</span>, <a href="/logout">Çıkış Yapın</a></h3>
+    {% else %}
+    <h3 class="menuItem passItem"><a href="/register" class="register-link">Kayıt Ol </a></h3>
+    <h3 class="menuItem passItem"><a href="/login" class="login-link">Giriş Yap </a></h3>
+    {% endif %}
         </div>
     </nav>
     <div class="slider" >
@@ -83,7 +89,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">AIR FORCE</br> YENİ</br>SEZON</h1>
                 <h2 class="sliderPrice">4400₺</h2>
-                <a href="#product">
+                <a href="/#product">
                     <button class="buyButton">ŞİMDİ SATIN ALIN!</button>
                     
                     
@@ -94,7 +100,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">AIR JORDAN</br> YENİ</br>SEZON</h1>
                 <h2 class="sliderPrice">5000₺</h2>
-                <a href="#product">
+                <a href="/#product">
                     <button class="buyButton">ŞİMDİ SATIN ALIN!</button>
                 </a>
             </div>
@@ -104,7 +110,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">BLAZER</br>YENİ</br>SEZON</h1>
                 <h2 class="sliderPrice">3500₺</h2>
-                <a href="#product">
+                <a href="/#product">
                     <button class="buyButton">ŞİMDİ SATIN ALIN!</button>
                 </a>
             </div>
@@ -113,7 +119,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">CRATER</br> YENİ</br>SEZON</h1>
                 <h2 class="sliderPrice">3900₺</h2>
-                <a href="#product">
+                <a href="/#product">
                     <button class="buyButton">ŞİMDİ SATIN AL!</button>
                 </a>
             </div>
@@ -122,7 +128,7 @@
                 <div class="sliderBg"></div>
                 <h1 class="sliderTitle">HIPPIE</br> YENİ</br>SEZON</h1>
                 <h2 class="sliderPrice">3200₺</h2>
-                <a href="#product">
+                <a href="/#product">
                     <button class="buyButton">ŞİMDİ SATIN AL!</button>
 
                 </a>
@@ -176,10 +182,10 @@
                 <div class="size">45</div>
             </div>
             <button class="productButton">BUY NOW !</button>
-            <button class="productButton" 
+            <button class="productButton" id="addToCart"
     data-product-id="1" 
-    data-product-name="AIR FORCE" 
-    data-product-price="4400₺" 
+    data-product-name="SELAMİ ŞAHİN" 
+    data-product-price="2200₺" 
     data-product-image="img/air.png">
     SEPETE EKLE
 </button>
@@ -238,7 +244,7 @@
             <h3 class="nsTitleSm">YENİ KIŞ ÜRÜNLERİ</h3>
             <h1 class="nsTitle">YENİ SEZON</h1>
             <h1 class="nsTitle">YENİ KOLEKSİYON</h1>
-            <a href="#nav">
+            <a href="/#nav">
                 <button class="nsButton">TARZINI SEÇ!</button>
             </a>
         </div>
@@ -262,10 +268,10 @@
             <div class="footerMenu" >
                 <h1 class="fMenuTitle">Useful Links</h1>
                 <ul class="fList">
-                    <li class="fListItem"><a href="support.html">DESTEK</a></li>
-                    <li class="fListItem"><a href="iade.html">İADE</a></li>
-                    <li class="fListItem"><a href="faq.html">S.S.S.</a></li>
-                    <li class="fListItem"><a href="değerlendirme.html">DEĞERLENDİRME</a></li>
+                    <li class="fListItem"><a href="/support">DESTEK</a></li>
+                    <li class="fListItem"><a href="/iade">İADE</a></li>
+                    <li class="fListItem"><a href="/faq">S.S.S.</a></li>
+                    <li class="fListItem"><a href="/değerlendirme">DEĞERLENDİRME</a></li>
                     <li class="fListItem">MAĞAZALAR</li>
                 </ul>
             </div><div class="footerMenu" >
