@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dropdownMenu = document.getElementById("dropdown-menu");
   const subcategories = document.getElementById("subcategories");
   let activeCategory = null;
+  
 
   // Hamburger menüsüne tıklayınca açılır listeyi göster veya gizle
   hamburgerMenu.addEventListener("click", () => {
