@@ -43,6 +43,32 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const cartIcon = document.getElementById("cart-icon");
+  const cartPopup = document.getElementById("cart-popup");
+  const viewCartButton = document.getElementById("view-cart");
+
+  // Sepet ikonuna tıklanınca popup'ı göster/gizle
+  cartIcon.addEventListener("click", () => {
+      if (cartPopup.style.display === "block") {
+          cartPopup.style.display = "none";
+      } else {
+          cartPopup.style.display = "block";
+      }
+  });
+
+  // Sepet detaylarına yönlendirme
+  viewCartButton.addEventListener("click", () => {
+      window.location.href = "shopping-cart.html"; // Sepet sayfasına yönlendirme
+  });
+
+  // Sayfanın başka bir yerine tıklanınca popup'ı kapat
+  document.addEventListener("click", (e) => {
+      if (!cartIcon.contains(e.target) && !cartPopup.contains(e.target)) {
+          cartPopup.style.display = "none";
+      }
+  });
+});
 
 
 const products = [
