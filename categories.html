@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kategoriler</title>
+    <base href="/static/" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Kategoriler</h1>
+    <ul>
+        {% for category in categories %}
+        <li>
+            <a href="/products/{{ category.id }}">{{ category.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

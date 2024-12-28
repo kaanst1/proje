@@ -3,7 +3,6 @@ const menuItems = document.querySelectorAll(".menuItem:not(.passItem)");
 document.addEventListener("DOMContentLoaded", () => {
   const hamburgerMenu = document.getElementById("hamburger-menu");
   const dropdownMenu = document.getElementById("dropdown-menu");
-  const subcategories = document.getElementById("subcategories");
   let activeCategory = null;
   // Sepet Verileri
 const cartItems = [];
@@ -21,8 +20,7 @@ document.querySelectorAll(".productButton").forEach((button) => {
         const productImage = button.getAttribute("data-product-image");
 
         // Sepete Ürün Ekle
-        cartItems.push({ id: productId, name: productName, price: productPrice, image: productImage });
-        updateCartUI();
+        addToCart();
     });
 });
 function updateCartUI() {
@@ -78,10 +76,8 @@ cartIcon.addEventListener("click", () => {
   hamburgerMenu.addEventListener("click", () => {
       if (dropdownMenu.style.display === "block") {
           dropdownMenu.style.display = "none";
-          subcategories.style.display = "none"; // Alt kategorileri de gizle
       } else {
           dropdownMenu.style.display = "block";
-          subcategories.style.display = "none"; // Alt kategoriler kapalı başlasın
       }
   });
 
@@ -90,16 +86,6 @@ cartIcon.addEventListener("click", () => {
       category.addEventListener("click", () => {
           const categoryName = category.getAttribute("data-category");
           activeCategory = categoryName;
-
-          // İlgili alt kategorileri göster, diğerlerini gizle
-          subcategories.style.display = "block";
-          document.querySelectorAll(".subcategories .subcategory").forEach((subcategory) => {
-              if (subcategory.getAttribute("data-parent") === categoryName) {
-                  subcategory.style.display = "block";
-              } else {
-                  subcategory.style.display = "none";
-              }
-          });
       });
   });
 
@@ -107,7 +93,6 @@ cartIcon.addEventListener("click", () => {
   document.addEventListener("click", (e) => {
       if (!hamburgerMenu.contains(e.target) && !dropdownMenu.contains(e.target)) {
           dropdownMenu.style.display = "none";
-          subcategories.style.display = "none";
       }
   });
 });
@@ -127,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Sepet detaylarına yönlendirme
   viewCartButton.addEventListener("click", () => {
-      window.location.href = "shopping-cart.html"; // Sepet sayfasına yönlendirme
+      window.location.href = "/cart"; // Sepet sayfasına yönlendirme
   });
 
   // Sayfanın başka bir yerine tıklanınca popup'ı kapat
@@ -135,6 +120,39 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!cartIcon.contains(e.target) && !cartPopup.contains(e.target)) {
           cartPopup.style.display = "none";
       }
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const stars = document.querySelectorAll('.star');
+  const reviewText = document.getElementById('review-text');
+  const submitReview = document.getElementById('submit-review');
+  const reviewList = document.getElementById('review-list');
+  let selectedRating = 0;
+
+  stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+          selectedRating = index + 1;
+          stars.forEach((s, i) => {
+              s.classList.toggle('active', i < selectedRating);
+          });
+      });
+  });
+
+  submitReview.addEventListener('click', () => {
+      const review = reviewText.value.trim();
+      if (selectedRating === 0 || review === '') {
+          alert('Lütfen değerlendirme ve yorumunuzu doldurun.');
+          return;
+      }
+
+      const reviewItem = document.createElement('div');
+      reviewItem.className = 'review-item';
+      reviewItem.innerHTML = `<strong>${selectedRating} yıldız</strong>: ${review}`;
+      reviewList.appendChild(reviewItem);
+
+      reviewText.value = '';
+      stars.forEach(star => star.classList.remove('active'));
+      selectedRating = 0;
   });
 });
 
@@ -278,3 +296,37 @@ productButton.addEventListener("click", () => {
 close.addEventListener("click", () => {
   payment.style.display = "none";
 });
+
+function openCart(){
+  let req = new XMLHttpRequest();
+  req.onload = function(){
+    let data = JSON.parse(this.responseText).cart;
+    let cartItemsContainer = document.querySelector(".cart-items");
+    cartItemsContainer.innerHTML = "";
+    for(let i = 0; i < data.length; i++) {
+      let item = document.createElement("div");
+      item.className = "cart-item";
+      item.innerHTML = `
+        <img src="/img/products/${data[i].id}.png" alt="${data[i].name}" width="50" />
+        <div>
+          <h4>${data[i].name}</h4>
+          <p>${data[i].price}</p>
+        </div>
+      `;
+      cartItemsContainer.appendChild(item);
+    }
+  };
+
+  req.open("POST", "/get_cart");
+  req.send();
+}
+
+function addToCart(){
+  let req = new XMLHttpRequest();
+  req.onload = function(){
+    openCart();
+  };
+
+  req.open("POST", "/add_to_cart/" + choosenProduct.id);
+  req.send();
+}

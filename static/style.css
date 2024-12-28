@@ -173,7 +173,7 @@ body {
 /* Alışveriş Sepeti İkonu */
 .cart-icon {
   position: fixed;
-  top: 92px;
+  top: 65px;
   right: 45px;
   width: 50px;
   height: 50px;
@@ -241,7 +241,6 @@ body {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  margin-left: 1280px;
   
 }
 
@@ -259,11 +258,12 @@ body {
   background-color: #000000;
   border: 1px solid rgb(255, 255, 255);
   position: absolute;
-  top: 150px;
-  left: 1180px;
+  top: 40px;
+  left: 100%;
   padding: 10px;
   z-index: 10;  
   width: 180px;
+  margin-left: -200px;
 }
 
 .dropdown-menu .category {
@@ -281,7 +281,7 @@ body {
   border: 1px solid rgb(255, 255, 255);
   position: absolute;
   top: 150px;
-  left: 1330px;
+  left: 1315px;
   padding: 10px;
   z-index: 10;
   width: 150px;
@@ -308,7 +308,9 @@ nav {
   align-items: center;
   justify-content: space-between;
 }
-
+.navItem {
+  top: 75px;
+}
 .search {
   display: flex;
   align-items: center;
@@ -343,6 +345,10 @@ nav {
   cursor: pointer;
   color: lightgray;
   font-weight: 400;
+}
+.register-link, .login-link {
+  color: white;
+  text-decoration: none;
 }
 
 .slider {
@@ -867,4 +873,60 @@ footer {
 
 .return-form input[type="submit"]:hover {
   background-color: #45a049;
+}
+.menu-container {
+  position: absolute;
+  top: 75px;
+  width: 100px;
+  right: 100px;
+}
+
+.dropdown-menu a {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  color: white;
+  text-decoration: none;
+}
+
+.product-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: block;
+}
+
+.product-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: inline-block;
+}
+
+.product-container ul li {
+  display: block;
+  width: 20%;
+  padding: 10px;
+  box-sizing: border-box;
+  float: left;
+}
+
+.product-container ul li .product-box {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  display: block;
+  color: #0A0A0A;
+  text-decoration: none;
+}
+
+.product-container ul li .product-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

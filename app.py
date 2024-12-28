@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_ECHO'] = True  # SQL sorgularını terminalde gösterir (
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
+
 # Kullanıcı modeli
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +27,12 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    category_id = db.Column(db.Integer, nullable=False)
+    
+# Kategori modeli
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
 
 # Veritabanını oluşturma
 with app.app_context():
@@ -38,9 +45,10 @@ def initialize_cart():
 
 @app.route('/')
 def home():
-    userdata = { 'login': False, 'name': '', 'id': 0 }
+    categories = Category.query.all()
+    userdata = { 'login': False, 'name': '', 'id': 0, 'categories': categories }
     if 'user_id' in session:
-       userdata = { 'login': True, 'name': session['username'], 'id': session['user_id'] }
+       userdata = { 'login': True, 'name': session['username'], 'id': session['user_id'], 'categories': categories }
     return render_template('index.html', **userdata)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -104,14 +112,16 @@ def logout():
     return redirect(url_for('home'))
 
 # Ürünleri listeleme
-@app.route('/products')
-def product_list():
+@app.route('/products/<int:category_id>')
+def products(category_id):
     if 'user_id' not in session:
         flash('Ürünleri görmek için giriş yapmalısınız.', 'danger')
         return redirect(url_for('login'))
     
-    products = Product.query.all()
-    return render_template('products.html', products=products)
+    products = Product.query.filter_by(category_id=category_id).all()
+    category = Category.query.get(category_id)
+    model = {'products': products, 'category': category}
+    return render_template('products.html', **model)
 
 # Sepete ürün ekleme
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
@@ -124,8 +134,11 @@ def add_to_cart(product_id):
         flash(f'{product.name} sepete eklendi.', 'success')
     else:
         flash('Ürün bulunamadı.', 'danger')
-    return redirect(url_for('product_list'))
+    return redirect('/products/'+str(product.category_id))
 
+@app.route('/iade')
+def iade():
+    return render_template('iade.html')
 # Sepeti görüntüleme
 @app.route('/cart')
 def view_cart():
@@ -139,7 +152,33 @@ def clear_cart():
     flash('Sepet temizlendi.', 'success')
     return redirect(url_for('view_cart'))
 
+@app.route('/cart')
+def cart():
+    return render_template('cart.html')
+
+@app.route('/support')
+def support():
+    return render_template('support.html')
+
+
+@app.route('/categories')
+def categories():
+    cats = Category.query.all()
+    view = { 'login': '', 'categories': cats }
+    return render_template('categories.html', **view)
+
+@app.route('/get_cart', methods=['POST'])
+def get_cart():
+    cart = session['cart'];
+    ids = []
+    for item in cart:
+        ids.append(item['id'])
+    products = Product.query.filter(Product.id.in_(ids)).all()
+    prod_list = []
+    for product in products:
+        prod_list.append({'id': product.id, 'name': product.name, 'price': product.price})
+    return {'cart': prod_list}
+
 if __name__ == '__main__':
     app.run(debug=True)
 
- 

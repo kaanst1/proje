@@ -4,19 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Ürünler</title>
+    <base href="/static/" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Ürünler</h1>
-    <ul>
-        {% for product in products %}
-        <li>
-            {{ product.name }} - {{ product.price }} TL
-            <form action="/add_to_cart/{{ product.id }}" method="post" style="display:inline;">
-                <button type="submit">Sepete Ekle</button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/cart">Sepeti Görüntüle</a>
+    <h1>{{ category.name }} Kategorisine Ait Ürünler</h1>
+    <div class="product-container">
+        <ul>
+            {% for product in products %}
+                <li>
+                    <div class="product-box">
+                        <img src="/img/products/{{ product.id }}.png" />
+                        <span>{{ product.name }} - {{ product.price }} ₺</span>
+                        <form action="/add_to_cart/{{ product.id }}" method="post" style="display:inline;">
+                            <button type="submit">Sepete Ekle</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

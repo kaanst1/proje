@@ -15,7 +15,7 @@
     
     
     <!-- Alışveriş Sepeti -->
-<div class="cart-icon" id="cart-icon">
+<div class="cart-icon" onclick="openCart();" id="cart-icon">
     <img src="img/sc.png" alt="Shopping Cart" class="cart-logo">
 </div>
 <div class="cart-popup" id="cart-popup">
@@ -27,35 +27,9 @@
 </div>
 
     <nav id="nav">
-        <div class="navItem">
-            <div class="hamburger-menu" id="hamburger-menu">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu">
-                <div class="category" data-category="men">Men</div>
-                <div class="category" data-category="women">Women</div>
-                <div class="category" data-category="kids">Kids</div>
-            </div>
-            <div class="subcategories" id="subcategories">
-                <div class="subcategory" data-parent="women"><a href="women/womensneakers.html">Sneakers</a></div>
-                <div class="subcategory" data-parent="women"><a href="women/womentshirt.html">T-shirt</a></div>
-                <div class="subcategory" data-parent="women"><a href="women/womensweatshirt.html">Sweatshirt</a></div>
-                <div class="subcategory" data-parent="women"><a href="women/womenshort.html">Short</a></div>
-                <div class="subcategory" data-parent="men"><a href="men/mensneakers.html">Sneakers</a></div>
-                <div class="subcategory" data-parent="men"><a href="men/mentshirt.html">T-shirt</a></div>
-                <div class="subcategory" data-parent="men"><a href="men/mensweetshirt.html">Sweatshirt</a></div>
-                <div class="subcategory" data-parent="men"><a href="men/menshort.html">Short</a></div>
-                <div class="subcategory" data-parent="kids"><a href="kids/kidssneakers.html">Sneakers</a></div>
-                <div class="subcategory" data-parent="kids"><a href="kids/kidstshirt.html"></a>T-shirt</div>
-                <div class="subcategory" data-parent="kids"><a href="kids/kidssweatshirt.html">Sweatshirt</a></div>
-                <div class="subcategory" data-parent="kids"><a href="kids/kidsshort.html">Short</a></div>
-            </div>
-        </div>
         <div class="navTop" >
             <div class="navItem">
-                <img src="img/sneakers.png" alt="">
+                <img src="img/page/logo.png" alt="">
             </div>
             <div class="navItem" >
                 <div class="search">
@@ -80,6 +54,18 @@
     <h3 class="menuItem passItem"><a href="/register" class="register-link">Kayıt Ol </a></h3>
     <h3 class="menuItem passItem"><a href="/login" class="login-link">Giriş Yap </a></h3>
     {% endif %}
+        </div>
+        <div class="navItem menu-container">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu">
+                {% for category in categories %}
+                    <a href="/products/{{ category.id }}" class="category">{{ category.name }}</a>
+                {% endfor %}
+            </div>
         </div>
     </nav>
     <div class="slider" >
@@ -271,7 +257,7 @@
                     <li class="fListItem"><a href="/support">DESTEK</a></li>
                     <li class="fListItem"><a href="/iade">İADE</a></li>
                     <li class="fListItem"><a href="/faq">S.S.S.</a></li>
-                    <li class="fListItem"><a href="/değerlendirme">DEĞERLENDİRME</a></li>
+                    <li class="fListItem"><a href="/degerlendirme">DEĞERLENDİRME</a></li>
                     <li class="fListItem">MAĞAZALAR</li>
                 </ul>
             </div><div class="footerMenu" >
