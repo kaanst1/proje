@@ -13,7 +13,7 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
-/* Sepet başlangıçta gizli */
+
 .cart-popup {
   display: none;
   position: fixed;
@@ -26,12 +26,12 @@ body {
   z-index: 100;
 }
 
-/* Görünür olduğunda */
+
 .cart-popup.active {
   display: block;
 }
 
-/* Sepet Genel Stili */
+
 .cart-container {
     width: 80%;
     max-width: 600px;
@@ -170,7 +170,7 @@ body {
     border: none;
 }
 
-/* Alışveriş Sepeti İkonu */
+
 .cart-icon {
   position: fixed;
   top: 65px;
@@ -192,7 +192,7 @@ body {
   height: 30px;
 }
 
-/* Alışveriş Sepeti Popup */
+
 .cart-popup {
   position: fixed;
   top: 145px;
@@ -743,7 +743,7 @@ footer {
   font-size: 14px;
 }
 
-/* Responsive Styles for Small Screens */
+
 @media screen and (max-width: 480px) {
   nav {
     padding: 10px;

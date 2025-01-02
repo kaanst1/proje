@@ -9,12 +9,12 @@ app.secret_key = 'your_secret_key'
 # Veritabanı yapılandırması
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True  # SQL sorgularını terminalde gösterir (debug için)
+app.config['SQLALCHEMY_ECHO'] = True  
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 
-# Kullanıcı modeli
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(150), nullable=False)
@@ -22,23 +22,23 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
 
-# Ürün modeli
+
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     category_id = db.Column(db.Integer, nullable=False)
     
-# Kategori modeli
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
 
-# Veritabanını oluşturma
+
 with app.app_context():
     db.create_all()
 
-# Oturumda sepeti başlatma fonksiyonu
+
 def initialize_cart():
     if 'cart' not in session:
         session['cart'] = []
@@ -60,22 +60,22 @@ def register():
         password = request.form['password']
         confirm_password = request.form['confirm_password']
 
-        # Şifreler eşleşiyor mu?
+        
         if password != confirm_password:
             flash('Şifreler eşleşmiyor. Lütfen tekrar deneyin.', 'danger')
             return redirect(url_for('register'))
 
-        # E-posta veya kullanıcı adı zaten kayıtlı mı?
+        
         existing_user = User.query.filter((User.email == email) | (User.username == username)).first()
         if existing_user:
             flash('E-posta veya kullanıcı adı zaten kayıtlı.', 'danger')
             return redirect(url_for('register'))
 
-        # Şifreyi hashleme
+        
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
         try:
-            # Yeni kullanıcıyı kaydetme
+            
             new_user = User(fullname=fullname, email=email, username=username, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
@@ -111,7 +111,7 @@ def logout():
     flash('Başarıyla çıkış yaptınız.', 'success')
     return redirect(url_for('home'))
 
-# Ürünleri listeleme
+
 @app.route('/products/<int:category_id>')
 def products(category_id):
     if 'user_id' not in session:
@@ -123,7 +123,7 @@ def products(category_id):
     model = {'products': products, 'category': category}
     return render_template('products.html', **model)
 
-# Sepete ürün ekleme
+
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     initialize_cart()
@@ -139,7 +139,7 @@ def add_to_cart(product_id):
 @app.route('/iade')
 def iade():
     return render_template('iade.html')
-# Sepeti görüntüleme
+
 @app.route('/cart')
 def view_cart():
     initialize_cart()
@@ -152,7 +152,7 @@ def view_cart():
     model = { 'cart': cart, 'cart_total': cart_total }
     return render_template('cart.html', **model)
 
-# Sepeti temizleme
+
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
     session.pop('cart', None)

@@ -4,27 +4,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const hamburgerMenu = document.getElementById("hamburger-menu");
   const dropdownMenu = document.getElementById("dropdown-menu");
   let activeCategory = null;
-  // Sepet Verileri
 const cartItems = [];
 const cartIcon = document.getElementById("cart-icon");
 const cartPopup = document.getElementById("cart-popup");
 const cartItemsContainer = document.querySelector(".cart-items");
 
-// "SEPETE EKLE" Butonlarına Tıklama
 document.querySelectorAll(".productButton").forEach((button) => {
     button.addEventListener("click", (event) => {
-        // Ürün Verilerini Al
+        
         const productId = button.getAttribute("data-product-id");
         const productName = button.getAttribute("data-product-name");
         const productPrice = button.getAttribute("data-product-price");
         const productImage = button.getAttribute("data-product-image");
 
-        // Sepete Ürün Ekle
+       
         addToCart();
     });
 });
 function updateCartUI() {
-  cartItemsContainer.innerHTML = ""; // Eski içeriği temizle
+  cartItemsContainer.innerHTML = ""; 
 
   cartItems.forEach((item) => {
       const itemElement = document.createElement("div");
@@ -39,16 +37,16 @@ function updateCartUI() {
       cartItemsContainer.appendChild(itemElement);
   });
 
-  // Sepet popup'ını görünür yap
+  
   cartPopup.classList.add("active");
 }
 
 
-// Sepet UI Güncelleme
-function updateCartUI() {
-    cartItemsContainer.innerHTML = ""; // Eski içeriği temizle
 
-    // Her bir ürün için yeni içerik oluştur
+function updateCartUI() {
+    cartItemsContainer.innerHTML = ""; 
+
+    
     cartItems.forEach((item) => {
         const itemElement = document.createElement("div");
         itemElement.classList.add("cart-item");
@@ -62,17 +60,17 @@ function updateCartUI() {
         cartItemsContainer.appendChild(itemElement);
     });
 
-    // Sepet popup'ını görünür yap
+    
     cartPopup.classList.add("active");
 }
 
-// Sepet İkonuna Tıklama
+
 cartIcon.addEventListener("click", () => {
     cartPopup.classList.toggle("active");
 });
 
 
-  // Hamburger menüsüne tıklayınca açılır listeyi göster veya gizle
+  
   hamburgerMenu.addEventListener("click", () => {
       if (dropdownMenu.style.display === "block") {
           dropdownMenu.style.display = "none";
@@ -81,7 +79,7 @@ cartIcon.addEventListener("click", () => {
       }
   });
 
-  // Kategoriye tıklanınca ilgili alt kategorileri göster
+  
   document.querySelectorAll(".dropdown-menu .category").forEach((category) => {
       category.addEventListener("click", () => {
           const categoryName = category.getAttribute("data-category");
@@ -89,7 +87,7 @@ cartIcon.addEventListener("click", () => {
       });
   });
 
-  // Menülerin dışında bir yere tıklanınca menüyü gizle
+  
   document.addEventListener("click", (e) => {
       if (!hamburgerMenu.contains(e.target) && !dropdownMenu.contains(e.target)) {
           dropdownMenu.style.display = "none";
@@ -101,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartPopup = document.getElementById("cart-popup");
   const viewCartButton = document.getElementById("view-cart");
 
-  // Sepet ikonuna tıklanınca popup'ı göster/gizle
+  
   cartIcon.addEventListener("click", () => {
       if (cartPopup.style.display === "block") {
           cartPopup.style.display = "none";
@@ -110,12 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 
-  // Sepet detaylarına yönlendirme
+  
   viewCartButton.addEventListener("click", () => {
-      window.location.href = "/cart"; // Sepet sayfasına yönlendirme
+      window.location.href = "/cart"; 
   });
 
-  // Sayfanın başka bir yerine tıklanınca popup'ı kapat
+  
   document.addEventListener("click", (e) => {
       if (!cartIcon.contains(e.target) && !cartPopup.contains(e.target)) {
           cartPopup.style.display = "none";
