@@ -143,7 +143,14 @@ def iade():
 @app.route('/cart')
 def view_cart():
     initialize_cart()
-    return render_template('cart.html', cart=session['cart'])
+    cart = session['cart'];
+    ids = []
+    for item in cart:
+        ids.append(item['id'])
+    products = Product.query.filter(Product.id.in_(ids)).all()
+    cart_total = sum(item.price for item in products)
+    model = { 'cart': cart, 'cart_total': cart_total }
+    return render_template('cart.html', **model)
 
 # Sepeti temizleme
 @app.route('/clear_cart', methods=['POST'])
@@ -178,6 +185,12 @@ def get_cart():
     for product in products:
         prod_list.append({'id': product.id, 'name': product.name, 'price': product.price})
     return {'cart': prod_list}
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
+@app.route('/degerlendirme')
+def degerlendirme():
+    return render_template('degerlendirme.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
